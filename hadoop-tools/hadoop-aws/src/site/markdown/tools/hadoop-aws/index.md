@@ -30,7 +30,7 @@ See also:
 * [Troubleshooting](./troubleshooting_s3a.html)
 * [Testing](./testing.html)
 
-##<a name="overview"></a> Overview
+## [Overview](#overview)
 
 Apache Hadoop's `hadoop-aws` module provides support for AWS integration.
 applications to easily use this support.
@@ -49,7 +49,7 @@ The settings in this file does not propagate to deployed applications, but it wi
 work for local clients such as the `hadoop fs` command.
 
 
-## <a name="introduction"></a> Introducing the Hadoop S3A client.
+## [Introducing the Hadoop S3A client](#introduction).
 
 Hadoop's "S3A" client offers high-performance IO against Amazon S3 object store
 and compatible implementations.
@@ -85,7 +85,7 @@ maintain it.
    This connectore is no longer available: users must migrate to the newer `s3a:` client.
 
 
-##<a name="getting_started"></a> Getting Started
+## [Getting Started](#getting-started)
 
 S3A depends upon two JARs, alongside `hadoop-common` and its dependencies.
 
@@ -123,7 +123,7 @@ Hadoop dependency JARs in downstream applications. The `hadoop-client` or
 </dependencies>
 ```
 
-## <a name="warning"></a> Warnings
+## [Warnings](#warning)
 
 Amazon S3 is an example of "an object store". In order to achieve scalability
 and especially high availability, S3 has —as many other cloud object stores have
@@ -236,7 +236,7 @@ Pleae consult
 [the EMR storage documentation](http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-file-systems.html)
 instead.
 
-## <a name="authenticating"></a> Authenticating with S3
+## [Authenticating with S3](#authenticating)
 
 Except when interacting with public S3 buckets, the S3A client
 needs the credentials needed to interact with buckets.
@@ -305,7 +305,7 @@ of `com.amazonaws.auth.AWSCredentialsProvider` may also be used.
 </property>
 ```
 
-### <a name="auth_env_vars"></a> Authenticating via the AWS Environment Variables
+### [Authenticating via the AWS Environment Variables](#auth-env-vars)
 
 S3A supports configuration via [the standard AWS environment variables](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment).
 
@@ -336,7 +336,7 @@ set when an application is launched will not permit the launched application
 to access S3 resources. The environment variables must (somehow) be set
 on the hosts/processes where the work is executed.
 
-### <a name="auth_providers"></a> Changing Authentication Providers
+### [Changing Authentication Providers](#auth_providers)
 
 The standard way to authenticate is with an access key and secret key using the
 properties in the configuration file.
@@ -381,7 +381,7 @@ set up in the authentication chain:
 | `com.amazonaws.auth.EnvironmentVariableCredentialsProvider`| AWS Environment Variables |
 
 
-### <a name="auth_iam"></a> EC2 IAM Metadata Authentication with `InstanceProfileCredentialsProvider`
+### [EC2 IAM Metadata Authentication with `InstanceProfileCredentialsProvider`](#auth-iam)
 
 Applications running in EC2 may associate an IAM role with the VM and query the
 [EC2 Instance Metadata Service](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
@@ -616,7 +616,7 @@ Because the provider path is not itself a sensitive secret, there is no risk
 from placing its declaration on the command line.
 
 
-## <a name="general_configuration"></a>Genaral S3A Client configuration
+## [Genaral S3A Client configuration](#general-configuration)
 
 All S3A client options are configured with options with the prefix `fs.s3a.`.
 
@@ -875,7 +875,7 @@ options are covered in [Testing](./testing.md).
 </property>
 ```
 
-## <a name="per_bucket_configuration"></a>Configuring different S3 buckets with Per-Bucket Configuration
+## [Configuring different S3 buckets with Per-Bucket Configuration](#per-bucket-configuration)
 
 Different S3 buckets can be accessed with different S3A client configurations.
 This allows for different endpoints, data read and write strategies, as well
@@ -948,7 +948,7 @@ then declare the path to the appropriate credential file in
 a bucket-specific version of the property `fs.s3a.security.credential.provider.path`.
 
 
-###  <a name="per_bucket_endpoints"></a>Using Per-Bucket Configuration to access data round the world
+### [Using Per-Bucket Configuration to access data round the world](#per-bucket-endpoints)
 
 S3 Buckets are hosted in different "regions", the default being "US-East".
 The S3A client talks to this region by default, issing HTTP requests
@@ -1075,7 +1075,7 @@ Why explicitly declare a bucket bound to the central endpoint? It ensures
 that if the default endpoint is changed to a new region, data store in
 US-east is still reachable.
 
-## <a name="upload"></a>How S3A writes data to S3
+## [How S3A writes data to S3](#upload)
 
 The original S3A client implemented file writes by
 buffering all data to disk as it was written to the `OutputStream`.
@@ -1175,7 +1175,7 @@ statistics can also be logged by calling `toString()` on the current stream.
 completes in the `close()` call, which will block until the upload is completed.
 
 
-### <a name="upload_disk"></a>Buffering upload data on disk `fs.s3a.fast.upload.buffer=disk`
+### [Buffering upload data on disk `fs.s3a.fast.upload.buffer=disk`](#upload-disk)
 
 When `fs.s3a.fast.upload.buffer` is set to `disk`, all data is buffered
 to local hard disks prior to upload. This minimizes the amount of memory
@@ -1200,7 +1200,7 @@ consumed, and so eliminates heap size as the limiting factor in queued uploads
 This is the default buffer mechanism. The amount of data which can
 be buffered is limited by the amount of available disk space.
 
-### <a name="upload_bytebuffer"></a>Buffering upload data in ByteBuffers: `fs.s3a.fast.upload.buffer=bytebuffer`
+### [Buffering upload data in ByteBuffers: `fs.s3a.fast.upload.buffer=bytebuffer`](#upload-bytebuffer)
 
 When `fs.s3a.fast.upload.buffer` is set to `bytebuffer`, all data is buffered
 in "Direct" ByteBuffers prior to upload. This *may* be faster than buffering to disk,
@@ -1224,7 +1224,7 @@ of memory —and so the more care is needed in
 </property>
 ```
 
-### <a name="upload_array"></a>Buffering upload data in byte arrays: `fs.s3a.fast.upload.buffer=array`
+### [Buffering upload data in byte arrays: `fs.s3a.fast.upload.buffer=array`](#uploadarray)
 
 When `fs.s3a.fast.upload.buffer` is set to `array`, all data is buffered
 in byte arrays in the JVM's heap prior to upload.
@@ -1242,7 +1242,7 @@ the risk of heap overflows. This risk can be mitigated by
 </property>
 ```
 
-### <a name="upload_thread_tuning"></a>Upload Thread Tuning
+### [Upload Thread Tuning](#upload-thread-tuning)
 
 Both the [Array](#upload_array) and [Byte buffer](#upload_bytebuffer)
 buffer mechanisms can consume very large amounts of memory, on-heap or
@@ -1335,7 +1335,7 @@ from VMs running on EC2.
 </property>
 ```
 
-### <a name="multipart_purge"></a>Cleaning up after partial Upload Failures: `fs.s3a.multipart.purge`
+### [Cleaning up after partial Upload Failures: `fs.s3a.multipart.purge`](#multipart-purge)
 
 
 If an large stream writeoperation is interrupted, there may be
@@ -1444,7 +1444,7 @@ to set fadvise policies on input streams. Once implemented,
 this will become the supported mechanism used for configuring the input IO policy.
 
 
-##<a name="further_reading"></a> Other Topics
+## [Other Topics](#further-reading)
 
 ### Copying Data with distcp
 
